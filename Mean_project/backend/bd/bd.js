@@ -20,7 +20,7 @@ const dbConnection = async () =>{
 
         })
         //si todo funciona
-        console.log("Master your connection set up succesfully =)")
+        console.log("Master your connection set up succesfully =) In mongo DB")
     } catch (e) {
         console.log("Master please checkout im not working",e);
         //consola del navegador.

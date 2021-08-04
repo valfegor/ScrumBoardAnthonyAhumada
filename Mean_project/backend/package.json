@@ -1,4 +1,16 @@
 {
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Project Develop In NodeJs And ExpressJS",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "MEAN"
+  ],
+  "author": "@valfegor",
+  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "connect-multiparty": "^2.2.0",
@@ -11,17 +23,5 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
-  },
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "Aside",
-  "main": "index.js",
-  "scripts": {
-    "test": "nodemon index.js"
-  },
-  "keywords": [
-    "MEAN"
-  ],
-  "author": "@Valfegor",
-  "license": "ISC"
+  }
 }
