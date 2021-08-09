@@ -9,7 +9,7 @@
   "keywords": [
     "MEAN"
   ],
-  "author": "@valfegor",
+  "author": "@AnthonyAhumada",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -25,3 +25,4 @@
     "nodemon": "^2.0.12"
   }
 }
+
