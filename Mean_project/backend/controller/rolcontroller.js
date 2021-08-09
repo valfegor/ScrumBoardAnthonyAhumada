@@ -21,9 +21,33 @@ const registerRole = async(req,res)=>{
 
     //si no existe entonces ya puede empezar a guardarlo
 
+    //creamos nuestra clase Role recibimos los datos del modelo
     const role = new Role ({
         name:req.body.name,
+        description:req.body.description,
+        dbStatus:true,
+    });
 
-    })
+    //hora de guardar los datos es parecido a un push.
+
+    const result = await role.save();
+
+    if(!result) return res.status(401).send("Cant Save please try again");
+
+    //si si guarda
+
+    return res.status(200).send("Ok we save the data");
 
 }
+
+
+const listRole = async(req,res)=>{
+    //aqui buscamos en la base de datos Role
+    const role = await Role.find();
+    if(!role) return res.status(401).send("The role dont exist");
+    //si si lo encuentra devuelvo el role = el role es el de arriba
+    return res.status(200).send({role});
+};
+
+//aqui exporto las funciones
+module.exports = {registerRole,listRole};
