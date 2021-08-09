@@ -36,7 +36,7 @@ const registerRole = async(req,res)=>{
 
     //si si guarda
 
-    return res.status(200).send("Ok we save the data");
+    return res.status(200).send({role});
 
 }
 
