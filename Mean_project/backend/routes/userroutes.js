@@ -11,7 +11,7 @@ const Usercontroller = require("../controller/usercontroller");
 router.post("/register",Usercontroller.registerUser);
 
 //el ? significa que puede o no ser obligatorio para entregar la consulta
-router.get("/list/:name?",Usercontroller.listUser);
+router.get('/listUser/:name?',Usercontroller.listUser);
 
 
 //aqui me olvide de exportar mi router.

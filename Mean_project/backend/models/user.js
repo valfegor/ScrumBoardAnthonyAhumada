@@ -13,10 +13,10 @@ const moment = require("moment");
 
 
 const userSchema = new mongoose.Schema({
-        nombre:String,
+        name:String,
         password:String,
         email:String,
-        role_Id:{type:mongoose.Schema.ObjectId,ref:'role'},
+        roleId: { type: mongoose.Schema.ObjectId, ref: "role" },
         date:{type:Date,default:Date.now},
         dbStatus:Boolean,
 });

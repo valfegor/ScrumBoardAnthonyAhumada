@@ -24,7 +24,8 @@ const registerUser = async (req,res) => {
 
     //ahora el rol vamos a generar el rol
     //utilizamos una constante para validar si existe el rol , Aqui en esta parte en la base de datos ya debe estar creado el usuario con nombre user
-    let role = Role.findOne({name:"user"});
+    //recordar siempre colocar el await tuve un fallo en esta parte del codigo y al realizar la busqueda no me traia el rol por que estaba undefined
+    let role = await Role.findOne({name:"user"});
 
     if(!role) return res.status(400).send("This person dont have any role");
 
@@ -34,11 +35,11 @@ const registerUser = async (req,res) => {
         name:req.body.name,
         email:req.body.email,
         password:hash,
-        //no olvidar el object _id
-        role_Id:role._id,
+        roleId:role._id,
         dbStatus:true,
     })
 
+    console.log(user.roleId);
     //almacenamos en una variable para confirmar si efectivamente se guardo o no 
     const result = user.save();
 
