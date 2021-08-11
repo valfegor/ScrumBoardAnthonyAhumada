@@ -22,7 +22,21 @@ const registerUser = async (req,res) => {
 
     let hash = await bcrypt.hash(req.body.password,10);
 
-    
+    //ahora el rol vamos a generar el rol
+    //utilizamos una constante para validar si existe el rol , Aqui en esta parte en la base de datos ya debe estar creado el usuario con nombre user
+    let role = Role.findOne({name:"user"});
+
+    if(!role) return res.status(400).send("This person dont have any role");
+
+    //si todos los pasos anteriores se cumplen , ahora si procederemos a guardar nuestro usuario.
+
+    const user = new User({
+        name:req.body.name,
+        email:req.body.email,
+        password:hash,
+        //no olvidar el 
+    })
+
 }
 
 
