@@ -29,12 +29,14 @@ const registerUser = async (req,res) => {
     if(!role) return res.status(400).send("This person dont have any role");
 
     //si todos los pasos anteriores se cumplen , ahora si procederemos a guardar nuestro usuario.
-
+    //recordemos este es el json que vamos a guardar en nuestra base de datos
     const user = new User({
         name:req.body.name,
         email:req.body.email,
         password:hash,
-        //no olvidar el 
+        //no olvidar el object _id
+        role_Id:role._id,
+        dbStatus:true,
     })
 
 }
