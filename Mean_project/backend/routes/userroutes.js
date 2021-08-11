@@ -8,7 +8,10 @@ const router = express.Router();
 
 const Usercontroller = require("../controller/usercontroller");
 
-router.post("/user/register",Usercontroller.registerUser);
+router.post("/register",Usercontroller.registerUser);
+
+//el ? significa que puede o no ser obligatorio para entregar la consulta
+router.get("/list/:name?",Usercontroller.listUser);
 
 
 //aqui me olvide de exportar mi router.

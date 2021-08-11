@@ -59,7 +59,17 @@ const registerUser = async (req,res) => {
 
 
 const listUser = async (req,res) => {
+    //el parametro el filtro por el cual va a buscar esto esta en rutas
+    //el param tiene los parametros que tiene en la url , es lo qeu viene pegado a la url
+    //expresion regular un nombre o algo parecido o un vacio
+    //Expresion regular
+    //populate
+    let user = await User.find({name: new RegExp(req.params["name"],"i")}).populate("roleId").exec();
 
+    //si no hay array o si esta vacio retornamos que no hay usuarios
+    if(!user || user.length === 0) return res.status(401).send("No hay usuarios");
+
+    return res.status(200).send({user});
 }
 
 //exportamos nuestro modulo.
