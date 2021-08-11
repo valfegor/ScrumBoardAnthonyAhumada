@@ -39,9 +39,29 @@ const registerUser = async (req,res) => {
         dbStatus:true,
     })
 
+    //almacenamos en una variable para confirmar si efectivamente se guardo o no 
+    const result = user.save();
+
+    //si no se guarda se ejecuta esta sentencia
+    if(!result)return res.status(400).send("sorry try again");
+
+    //pero si si guarda realizamos un trycatch ya que realizamos nuevamente una coneccion a la base de datos.
+
+    try {
+        let jwt = user.generateJWT();
+        return res.status(200).send({jwt});
+    } catch (e) {
+        return res.status(400).send("sorry cant save",e);
+    }
+    
+
 }
 
 
 const listUser = async (req,res) => {
 
 }
+
+//exportamos nuestro modulo.
+
+module.exports = {registerUser,listUser};
