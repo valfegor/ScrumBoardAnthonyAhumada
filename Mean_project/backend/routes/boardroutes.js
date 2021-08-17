@@ -6,7 +6,7 @@ const router = express.Router();
 const boardController = require("../controller/boardcontroller");
 
 
-router.post("/task",boardController.saveTask);
+router.post("/saveTask",boardController.saveTask);
 
 
 module.exports = router;

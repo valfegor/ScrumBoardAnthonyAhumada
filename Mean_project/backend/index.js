@@ -43,6 +43,9 @@ app.use("/api/user",User);
 //ruta de login.
 
 app.use("/api/log",Login);
+
+//ruta de tareas.
+app.use("/api/task",Task);
 app.listen(process.env.PORT,()=>console.log("Backend Server Running  Ok On Port",process.env.PORT))
 
 //Esta parte se me olvido y me toco revisar como un pendejo -.-
