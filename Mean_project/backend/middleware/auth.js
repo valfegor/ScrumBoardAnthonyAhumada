@@ -12,6 +12,23 @@ const auth = async (req,res,next) => {
     //si el token es diferente o no tiene termina la ejecucion
     if(!jwtToken) return res.status(400).send("Invalid token");
 
-    
+    //aqui valido y separo el bearer y me quedo solamente con el token
+    jwtToken = jwtToken.split(" ")[1];
+
+    //aqui si no existe el token no permitimos el ingreso
+    if(!jwtToken) return res.status(400).send("invalid token");
+
+    //hacemos un bloque trycatch
+
+    try {
+        //hacemos uso de nuestra variable payload.
+
+        const payload = await jwt.verify(jwtToken,SECRET_KEY_JWT);
+        
+        req.user = payload;
+        next();
+    } catch (error) {
+    return res.status(400).send("Authorization denied : Invalid token");       
+    }
 
 }
