@@ -26,7 +26,9 @@ const auth = async (req,res,next) => {
         const payload = await jwt.verify(jwtToken,SECRET_KEY_JWT);
         
         req.user = payload;
+        //si todo sale bien procede a ingresar
         next();
+
     } catch (error) {
     return res.status(400).send("Authorization denied : Invalid token");       
     }
