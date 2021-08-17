@@ -34,4 +34,8 @@ const login = async (req,res) => {
     } catch (error) {
         return res.status(400).send("Sorry try again");
     }
+
+
 }
+
+module.exports = {login};
