@@ -10,7 +10,7 @@ const saveTask = async (req,res) => {
 
 
     const board = new Board ({
-        user_id:req.body.user_id,
+        user_id:req.user_id,
         description:req.body.description,
         name:req.body.name,
         taskStatus:"to-do",

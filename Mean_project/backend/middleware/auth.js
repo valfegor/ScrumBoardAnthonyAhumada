@@ -10,11 +10,12 @@ const auth = async (req,res,next) => {
     let jwtToken = req.header("Authorization");
 
     //si el token es diferente o no tiene termina la ejecucion
-    if(!jwtToken) return res.status(400).send("Invalid token");
+    if(!jwtToken) return res.status(400).send("No token please login");
 
     //aqui valido y separo el bearer y me quedo solamente con el token
     jwtToken = jwtToken.split(" ")[1];
 
+    console.log(jwtToken);
     //aqui si no existe el token no permitimos el ingreso
     if(!jwtToken) return res.status(400).send("invalid token");
 
@@ -23,10 +24,10 @@ const auth = async (req,res,next) => {
     try {
         //hacemos uso de nuestra variable payload.
 
-        const payload = await jwt.verify(jwtToken,SECRET_KEY_JWT);
-        
+        const payload = await jwt.verify(jwtToken,process.env.SECRET_KEY_JWT);
+        //usuario que debe estar ya logeado.
         req.user = payload;
-        //si todo sale bien procede a ingresar
+        //todo verificado se utiliza el next.
         next();
 
     } catch (error) {
@@ -34,3 +35,5 @@ const auth = async (req,res,next) => {
     }
 
 }
+
+module.exports = auth;
