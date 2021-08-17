@@ -25,6 +25,14 @@ const saveTask = async (req,res) => {
 
 }
 
+const showTasks=async (req,res) => {
+    const board = await Board.find();
+
+    if(!board) return res.status("No task saved yet");
+
+    return res.status(200).send({board});
+
+}
 
 
-module.exports = {saveTask}
+module.exports = {saveTask,showTasks}
