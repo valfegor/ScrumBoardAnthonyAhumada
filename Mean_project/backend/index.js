@@ -19,6 +19,9 @@ const User = require("./routes/userroutes");
 //llamado a la ruta de autenticacion del login.
 
 const Login = require("./routes/authroutes");
+
+
+const Task = require("./routes/boardroutes");
 //requiere la libreria que instalamos dotenv para configurar todas las variables de entorno
 //si no esta esta linea genera fallos a la hora de generar los archivos.
 

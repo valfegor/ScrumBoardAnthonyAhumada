@@ -3,10 +3,10 @@
 const mongoose = require('mongoose');
 
 const boardSchema = new mongoose.Schema({
-    user_id:{type:mongoose.model.ObjectId,ref:'user'},
+    user_id:{ type: mongoose.Schema.ObjectId, ref: "user" },
     name:String,
     description:String,
-    taskStatus:boolean,
+    taskStatus:Boolean,
     imageUrl:String,
     date:{type:Date , default:Date.now},
 
