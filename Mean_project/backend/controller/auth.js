@@ -24,4 +24,14 @@ const login = async (req,res) => {
 
 
     if(!hash) return res.status(400).send("Sorry check the password or the email.");
+
+    //realizamos un bloque TRYCATCH.-
+
+
+    try {
+        const jwt = user.generateJWT();
+        return res.status(200).send({jwt});
+    } catch (error) {
+        return res.status(400).send("Sorry try again");
+    }
 }
