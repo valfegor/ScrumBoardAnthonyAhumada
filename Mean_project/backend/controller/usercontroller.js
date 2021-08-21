@@ -27,6 +27,8 @@ const registerUser = async (req,res) => {
     //recordar siempre colocar el await tuve un fallo en esta parte del codigo y al realizar la busqueda no me traia el rol por que estaba undefined
     let role = await Role.findOne({name:"user"});
 
+    
+
     if(!role) return res.status(400).send("This person dont have any role");
 
     //si todos los pasos anteriores se cumplen , ahora si procederemos a guardar nuestro usuario.
