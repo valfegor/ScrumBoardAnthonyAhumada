@@ -20,7 +20,7 @@ const login = async (req,res) => {
     //ahora validamos la contraseña.
 
     //aqui utilizando el bcrypt comparo si lo que estoy enviando es lo mismo que se encuentra en la coleccion.
-    const hash = bcrypt.compare(req.body.password, user.password);
+    const hash = await bcrypt.compare(req.body.password, user.password);
 
 
     if(!hash) return res.status(400).send("Sorry check the password or the email.");

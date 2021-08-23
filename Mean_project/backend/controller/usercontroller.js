@@ -109,7 +109,7 @@ const DeleteUser = async (req,res) => {
     //buscamos el usuario por el _id
 
     let user = await User.findByIdAndUpdate(req.body._id,{
-        dbStatus:true,
+        dbStatus:false,
     })
 
     if(!user) return res.status(400).send("Sorry please try again.");

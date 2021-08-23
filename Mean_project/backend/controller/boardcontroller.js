@@ -36,6 +36,12 @@ const showTasks=async (req,res) => {
 }
 
 
+//updateTask.
+const updateTask = async (req,res) => {
+    let validId = mongoose.Types.ObjectId.isValid(req.body._id);
+    if (!validId) return res.status(400).send("Invalid id");
+}
+
 
 
 
