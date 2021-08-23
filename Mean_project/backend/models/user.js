@@ -29,6 +29,7 @@ userSchema.methods.generateJWT = function(){
         _id:this._id,
         name:this.name,
         iat:moment().unix(),
+        roleId: this.roleId,
     },process.env.SECRET_KEY_JWT
     );
 };

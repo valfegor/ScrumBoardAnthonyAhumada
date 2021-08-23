@@ -4,7 +4,7 @@
 const User = require("../models/user");
 const Role = require("../models/role");
 const bcrypt = require("bcrypt");
-const mongoose = require("../models/mongoose");
+const mongoose = require("mongoose");
 
 
 const registerUser = async (req,res) => {
@@ -83,7 +83,7 @@ const UpdateUser = async (req,res) => {
     let pass = "";
 
     if(req.body.password){
-        pass = bcrypt.hash(req.body.password,10);
+        pass = await bcrypt.hash(req.body.password,10);
     }
     else{
         let userFind = await User.findOne({email: req.body.email});
