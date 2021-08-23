@@ -11,7 +11,11 @@ const boardController = require("../controller/boardcontroller");
 
 router.post("/saveTask",Auth,Validate,boardController.saveTask);
 
-router.get("/listTask",boardController.showTasks);
+router.get("/listTask",Auth,Validate,boardController.showTasks);
+
+router.put("/updateTask",Auth,Validate,boardController.updateTask);
+
+router.delete("/removeTask/:_id",Auth,Validate,boardController.removeTask);
 
 
 module.exports = router;
