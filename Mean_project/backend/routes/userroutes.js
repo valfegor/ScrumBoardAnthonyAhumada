@@ -18,6 +18,9 @@ router.post("/register",Usercontroller.registerUser);
 router.get('/listUser/:name?',Auth,Validate,Usercontroller.listUser);
 
 
+router.put('/updateUser');
+
+
 //aqui me olvide de exportar mi router.
 
 module.exports = router;

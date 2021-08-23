@@ -75,6 +75,31 @@ const listUser = async (req,res) => {
     return res.status(200).send({user});
 }
 
+const UpdateUser = async (req,res) => {
+    if(!req.body._id || !req.body.name || !req.body.email || !req.body.roleId) return res.status(400).send("Please check all the camps");
+
+    let pass = "";
+
+    if(req.body.password){
+        pass = bcrypt.hash(req.body.password,10);
+    }
+    else{
+        let userFind = await User.findOne({email: req.body.email});
+        pass = userFind.password;
+    }
+
+
+    let user = await User.findByIdAndUpdate(req.body._id,{
+        name:req.body.name,
+        password:pass,
+        roleId:req.body.roleId,
+    })
+
+    if(!user) return res.status(400).send("Sorry please try again.");
+
+    return res.status(200).send({user});
+}
+
 //exportamos nuestro modulo.
 
-module.exports = {registerUser,listUser};
+module.exports = {registerUser,listUser,UpdateUser};
