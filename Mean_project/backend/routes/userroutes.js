@@ -8,18 +8,18 @@ const Auth = require("../middleware/auth");
 
 const Validate = require("../middleware/validate");
 
+const Admin = require("../middleware/admin");
+
 //tramos nuestro controlador.
 
 const Usercontroller = require("../controller/usercontroller");
 
-router.post("/register",Usercontroller.registerUser);
+router.post("/register", Usercontroller.registerUser);
 
 //el ? significa que puede o no ser obligatorio para entregar la consulta
-router.get('/listUser/:name?',Auth,Validate,Usercontroller.listUser);
+router.get("/listUser/:name?", Auth, Validate, Usercontroller.listUser);
 
-
-router.put('/updateUser');
-
+router.put("/updateUser", Auth, Validate, Admin, Usercontroller.UpdateUser);
 
 //aqui me olvide de exportar mi router.
 

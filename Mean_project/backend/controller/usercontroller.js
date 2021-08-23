@@ -4,6 +4,7 @@
 const User = require("../models/user");
 const Role = require("../models/role");
 const bcrypt = require("bcrypt");
+const mongoose = require("../models/mongoose");
 
 
 const registerUser = async (req,res) => {
@@ -75,6 +76,7 @@ const listUser = async (req,res) => {
     return res.status(200).send({user});
 }
 
+//exportamos nuestro modulo.
 const UpdateUser = async (req,res) => {
     if(!req.body._id || !req.body.name || !req.body.email || !req.body.roleId) return res.status(400).send("Please check all the camps");
 
@@ -100,6 +102,61 @@ const UpdateUser = async (req,res) => {
     return res.status(200).send({user});
 }
 
-//exportamos nuestro modulo.
+//en delete user se desactiva
+const DeleteUser = async (req,res) => {
+    if(!req.body._id) return res.status(400).send("Please check the data");
 
-module.exports = {registerUser,listUser,UpdateUser};
+    //buscamos el usuario por el _id
+
+    let user = await User.findByIdAndUpdate(req.body._id,{
+        dbStatus:true,
+    })
+
+    if(!user) return res.status(400).send("Sorry please try again.");
+
+    return res.status(200).send({user});
+}
+
+
+
+//registrando el administrator
+
+
+const registerAdmin = async (req,res) => {
+    if(!req.body.name || !req.body.password || !req.body.email || !req.body.roleId) return res.status(400).send("Sorry please check the camps");
+    
+    //validamos que el id_pertenezca a nuestra base y no sea inyectado.
+
+    let validId = await mongoose.Types.ObjectId.isValid(req.body.roleId);
+     if (!validId) return res.status(400).send("Invalid role ID");
+
+    //igual que en el de los usuarios validamos que el correo no exista.
+
+    const existingEmail = await User.findOne({email:req.body.email});
+
+    if(existingEmail)return res.status("Sorry the email is already taken");
+
+    const hash = await bcrypt.hash(req.body.password,10);
+
+    let user = new User({
+        name:req.body.name,
+        password:hash,
+        email:req.body.email,
+        dbStatus:true,
+        roleId:req.body.roleId,
+    })
+
+    let result = await user.save();
+
+    if(!result) return res.status(400).send("Sorry try again");
+
+    try {
+        let jwt = user.generateJWT();
+        return res.status(200).send({jwt});
+    } catch (e) {
+        return res.status(400).send("Please try again",e)
+    }
+
+}
+
+module.exports = {registerUser,listUser,UpdateUser,DeleteUser,registerAdmin};
